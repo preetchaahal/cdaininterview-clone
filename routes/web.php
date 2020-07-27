@@ -17,7 +17,7 @@ use App\SiteConfig;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('home')->middleware('auth.basic');
 
 Route::get('/contact-us', function () {
     return view('contact');
@@ -26,16 +26,16 @@ Route::get('/contact-us', function () {
 Route::namespace('Admin')->prefix('admin')->group(function () {
     Route::get('/', function () {
 	    return view('admin.index');
-	})->name('admin.index');
+	})->name('admin.index')->middleware('auth');
 
 	Route::get('/manage-images', function () {
 	    return view('admin.manage-images');
-	})->name('admin.manageImages');
+	})->name('admin.manageImages')->middleware('auth');
 
 	Route::get('/manage-pages', function () {
 		$pages = SitePage::all();
 	    return view('admin.manage-pages', ['pages' => $pages]);
-	})->name('admin.managePages');
+	})->name('admin.managePages')->middleware('auth');
 
 	Route::get('/site-config', function () {
 		$configContactEmail = SiteConfig::where('key', 'contact_email')->first();
@@ -46,10 +46,18 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
 	    	'google_analytics_tracking_id' => $configGoogleTrackingId->value,
 	    	'fb_pixel_code' => $configFbPixelCode->value
 	    ]);
-	})->name('admin.siteConfig');
+	})->name('admin.siteConfig')->middleware('auth');
 });
 
-Route::post('photo', 'ImageController@save');
-Route::post('savePage', 'ManagePagesController@save');
-Route::post('saveSiteConfig', 'ManagePagesController@saveSiteConfig');
+Route::post('photo', 'ImageController@save')->middleware('auth');
+Route::post('savePage', 'ManagePagesController@save')->middleware('auth');
+Route::post('saveSiteConfig', 'ManagePagesController@saveSiteConfig')->middleware('auth');
 Route::post('contactForm', 'ManagePagesController@contact');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

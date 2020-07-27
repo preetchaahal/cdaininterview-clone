@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-front')
 
 @section('title', 'FREE Ultimate Guide to CDA Interviews: Tips & Proven Strategies to Help You Prepare & Ace Your CDA Structured Interview.')
 
