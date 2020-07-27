@@ -29,6 +29,10 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route('home') }}" target="__blank" class="nav-link">Frontend</a>
+      </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('logout') }}"
             onclick="event.preventDefault();
@@ -37,6 +41,7 @@
           @csrf
         </form>
       </li>
+
     </ul>
   </nav>
   <!-- /.navbar -->

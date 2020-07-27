@@ -13,7 +13,7 @@ class SitePagesSeeder extends Seeder
     {
     	DB::table('site_pages')->insert([
             'title' => 'Home Page',
-            'slug' => '/',
+            'slug' => 'home',
             'meta_title' => '',
             'meta_description' => '',
             'noindex' => TRUE,

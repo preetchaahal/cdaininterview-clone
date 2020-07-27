@@ -17,11 +17,11 @@ use App\SiteConfig;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home')->middleware('auth.basic');
+})->name('home')->middleware('global.http.auth');	
 
 Route::get('/contact-us', function () {
     return view('contact');
-})->name('contactUs');
+})->name('contactUs')->middleware('global.http.auth');
 
 Route::namespace('Admin')->prefix('admin')->group(function () {
     Route::get('/', function () {
@@ -55,9 +55,3 @@ Route::post('saveSiteConfig', 'ManagePagesController@saveSiteConfig')->middlewar
 Route::post('contactForm', 'ManagePagesController@contact');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
